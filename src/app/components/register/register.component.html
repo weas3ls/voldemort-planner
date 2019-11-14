@@ -1,0 +1,65 @@
+<div class="row p-5">
+    <div class="col-12 col-lg-7 mx-lg-auto">
+        <mdb-card>
+            <mdb-card-header class="black white-text text-center py-4">
+                <h1 class="h1 my-0">Sign Up</h1>
+            </mdb-card-header>
+            <mdb-card-body class="px-lg-5">
+                <form class="text-center blue-grey-text" [formGroup]="validatingForm">
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="md-form">
+                                <input type="text" id="firstName" name="firstName" class="form-control" mdbInput>
+                                <label for="firstName">First name</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="md-form">
+                                <input type="email" id="lastName" name="lastName" class="form-control" mdbInput>
+                                <label for="lastName">Last name</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md-form mt-0">
+                        <input type="email" id="email" name="email" class="form-control" formControlName="email" mdbInput mdbValidate>
+                        <label for="email">E-mail</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="md-form">
+                                        <input type="password" id="password" name="password" class="form-control" length="25" mdbCharCounter mdbInput>
+                                        <label for="password">Password</label>
+                                    </div>
+                                    <div class="md-form">
+                                        <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" length="25" mdbCharCounter mdbInput>
+                                        <label for="confirmPassword">Confirm Password</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="file-field md-form">
+                                <div mdbBtn floating="true" size="md" color="black" mdbWavesEffect>
+                                    <mdb-icon fas icon="cloud-upload-alt" aria-hidden="true"></mdb-icon>
+                                    <input type="file" mdbFileSelect (uploadOutput)="onUploadOutput($event)" (change)="onSelectFile($event)" [uploadInput]="uploadInput">
+                                </div>
+                                <div class="file-path-wrapper mt-3">
+                                    <input class="file-path" type="text" placeholder="Upload your file" [value]="showFiles()">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <img [src]="url" class="rounded mx-auto d-block" height="200">
+                            </div>
+                        </div>
+                    </div>
+                    <button mdbBtn color="black" outline="true" rounded="true" block="true" class="my-4 waves-effect z-depth-0" mdbWavesEffect type="submit">Sign Up</button>
+                    <p>By clicking <em>Sign up</em> you agree to our <a href="" target="_blank">terms of service</a></p>
+                    <hr>
+                </form>
+                <p class="text-right">Already have an account? <a [routerLink]="['/login']" routerLinkActive="router-link-active">Click here to login</a></p>
+            </mdb-card-body>
+        </mdb-card>
+    </div>
+</div>
