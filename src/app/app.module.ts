@@ -4,21 +4,25 @@ import { AgmCoreModule } from '@agm/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { MDBBootstrapModulesPro } from 'ng-uikit-pro-standard';
-import { MDBSpinningPreloader } from 'ng-uikit-pro-standard';
+import { MDBBootstrapModulesPro, MDBSpinningPreloader, ToastModule } from 'ng-uikit-pro-standard';
+import { MdbCalendarModule } from 'mdb-calendar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
+import { MyEventsComponent } from './components/my-events/my-events.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         RegisterComponent,
         HeaderComponent,
-        LoginComponent
+        LoginComponent,
+        MyEventsComponent,
+        FooterComponent
     ],
     imports: [
         BrowserModule,
@@ -27,11 +31,13 @@ import { LoginComponent } from './components/login/login.component';
         ReactiveFormsModule,
         AppRoutingModule,
         MDBBootstrapModulesPro.forRoot(),
+        ToastModule.forRoot(),
+        MdbCalendarModule
         // AgmCoreModule.forRoot({ apiKey: 'Your_api_key' })
     ],
     providers: [
         MDBSpinningPreloader,
     ],
-    bootstrap: [AppComponent, HeaderComponent, RegisterComponent, LoginComponent]
+    bootstrap: [AppComponent, HeaderComponent, FooterComponent, RegisterComponent, LoginComponent]
 })
 export class AppModule { }

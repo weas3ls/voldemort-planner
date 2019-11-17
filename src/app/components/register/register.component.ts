@@ -1,7 +1,7 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { UploadFile, UploadInput, humanizeBytes, UploadOutput } from 'ng-uikit-pro-standard';
+import { ToastService } from 'ng-uikit-pro-standard';
 
 @Component({
     selector: 'app-register',
@@ -10,87 +10,40 @@ import { UploadFile, UploadInput, humanizeBytes, UploadOutput } from 'ng-uikit-p
 })
 export class RegisterComponent implements OnInit {
 
-    formData: FormData;
-    files: UploadFile[];
-    uploadInput: EventEmitter<UploadInput>;
-    humanizeBytes: Function;
-    dragOver: boolean;
-    url = 'https://via.placeholder.com/250x150';
+    loggedIn: boolean;
     validatingForm: FormGroup;
+    firstName: any;
+    lastName: any;
+    email: any;
+    password: any;
+    confirmPassword: any;
 
-    constructor() {
-        this.files = [];
-        this.uploadInput = new EventEmitter<UploadInput>();
-        this.humanizeBytes = humanizeBytes;
-    }
-
-    showFiles() {
-        let files = '';
-        for (let i = 0; i < this.files.length; i++) {
-            files += this.files[i].name;
-            if (!(this.files.length - 1 === i)) {
-                files += ',';
-            }
-        }
-        return files;
-    }
-
-    startUpload(): void {
-        const event: UploadInput = {
-            type: 'uploadAll',
-            url: 'your-path-to-backend-endpoint',
-            method: 'POST',
-            data: { foo: 'bar' },
-        };
-        this.files = [];
-        this.uploadInput.emit(event);
-    }
-
-    cancelUpload(id: string): void {
-        this.uploadInput.emit({ type: 'cancel', id: id });
-    }
-
-    onUploadOutput(output: UploadOutput | any): void {
-
-        if (output.type === 'allAddedToQueue') {
-        } else if (output.type === 'addedToQueue') {
-            this.files.push(output.file); // add file to array when added
-        } else if (output.type === 'uploading') {
-            // update current data in files array for uploading file
-            const index = this.files.findIndex(file => file.id === output.file.id);
-            this.files[index] = output.file;
-        } else if (output.type === 'removed') {
-            // remove file from array when removed
-            this.files = this.files.filter((file: UploadFile) => file !== output.file);
-        } else if (output.type === 'dragOver') {
-            this.dragOver = true;
-        } else if (output.type === 'dragOut') {
-        } else if (output.type === 'drop') {
-            this.dragOver = false;
-        }
-        this.showFiles();
-    }
-
-    // preview avatar on upload
-    onSelectFile(event) {
-        if (event.target.files && event.target.files[0]) {
-            var reader = new FileReader();
-
-            reader.readAsDataURL(event.target.files[0]); // read file as data url
-
-            reader.onload = (event) => { // called once readAsDataURL is completed
-                this.url = event.target.result as string;
-            }
-        }
-    }
+    constructor(private toastrService: ToastService) { }
 
     ngOnInit() {
         this.validatingForm = new FormGroup({
-            email: new FormControl(null, [Validators.required, Validators.email])
+            email: new FormControl(null, [Validators.required, Validators.email]),
+            firstName: new FormControl(null, [Validators.required]),
+            lastName: new FormControl(null, [Validators.required]),
+            password: new FormControl(null, [Validators.required]),
+            confirmPassword: new FormControl(null, [Validators.required])
         });
     }
 
-    get email() {
-        return this.validatingForm.get('email');
+    get credentials() {
+        if (this.password == this.confirmPassword) {
+            const credentials = {
+                firstName: this.firstName,
+                lastName: this.lastName,
+                email: this.email,
+                password: this.password,
+                confirmPassword: this.confirmPassword
+            }
+            console.log(credentials);
+            return credentials;
+        } else {
+            const options = { opacity: 1, progressBar: true, timeOut: 3000, closeButton: true };
+            this.toastrService.error('Your passwords don\'t match!', 'Hey!', options);
+        }
     }
 }

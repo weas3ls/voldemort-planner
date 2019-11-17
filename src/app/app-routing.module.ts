@@ -1,3 +1,4 @@
+import { MyEventsComponent } from './components/my-events/my-events.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
@@ -10,6 +11,9 @@ const routes: Routes = [{
 }, {
     path: 'register',
     component: RegisterComponent
+}, {
+    path: 'my-events',
+    component: MyEventsComponent
 }];
 
 @NgModule({
