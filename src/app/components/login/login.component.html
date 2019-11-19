@@ -1,0 +1,30 @@
+<div class="row p-5">
+    <div class="col-12 col-lg-5 mx-lg-auto">
+        <div class="card">
+            <h1 class="card-header black white-text text-center my-0 h1">Sign in</h1>
+            <div class="card-body px-lg-5 pt-0">
+                <form class="text-center blue-grey-text">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="md-form mb-0">
+                                <input type="email" name="email" [(ngModel)]="email" class="form-control" mdbInput mdbValidate>
+                                <label for="email">Email</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="md-form">
+                                <input type="password" name="password" [(ngModel)]="password" class="form-control" mdbInput mdbValidate>
+                                <label for="password">Password</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button mdbBtn color="black" rounded="true" block="true" class="my-4 waves-effect z-depth-0" mdbWavesEffect type="submit" (click)="submit()">Sign in</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <p class="text-right">Not a member? <a [routerLink]="['/register']" routerLinkActive="router-link-active">Register</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
