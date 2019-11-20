@@ -14,16 +14,18 @@ export class RegisterService {
     constructor(private httpClient: HttpClient) { }
 
     async register(credentials) {
-        const url = 'http://localhost:8080/register';
+        const url = 'http://localhost:8001/users';
         const user = await this.httpClient.post(url, credentials).toPromise();
+        console.log(user);
         if (user) {
             this.loggedInUser = {
-                id: user['id'],
-                firstName: user['firstName'],
+                id: user['userid'],
+                firstName: user['firstname'],
                 email: user['email'],
-                loggedIn: true,
-                avatar_url: user['avatar_url']
+                avatar_url: user['avatar'],
+                loggedIn: true
             };
         }
+        return this.loggedInUser;
     }
 }

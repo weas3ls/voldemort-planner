@@ -1,12 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgModule } from '@angular/core';
-import { AgmCoreModule } from '@agm/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/moment';
 
 import { MDBBootstrapModulesPro, MDBSpinningPreloader, ToastModule } from 'ng-uikit-pro-standard';
 
@@ -47,12 +43,7 @@ import { DeathEaterAnthemComponent } from './components/death-eater-anthem/death
         AppRoutingModule,
         MDBBootstrapModulesPro.forRoot(),
         ToastModule.forRoot(),
-        BrowserAnimationsModule,
-        // CalendarModule.forRoot({
-        //     provide: DateAdapter,
-        //     useFactory: adapterFactory
-        // })
-        AgmCoreModule.forRoot({ apiKey: 'AIzaSyAzO62kX48uZ-S9htCB8ovmfWNJ53LRg9U' })
+        BrowserAnimationsModule
     ],
     providers: [
         MDBSpinningPreloader,

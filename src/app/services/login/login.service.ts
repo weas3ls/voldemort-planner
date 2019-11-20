@@ -13,18 +13,20 @@ export class LoginService {
 
     constructor(private httpClient: HttpClient) { }
 
-    async login(credentials: { email: string, password: string }) {
-        const url = 'http://localhost:11000/project1/login';
+    async login(credentials: { username: string, password: string }) {
+        const url = 'http://localhost:8001/auth';
         const user = await this.httpClient.post(url, credentials).toPromise();
+        console.log(user);
         if (user) {
             this.loggedInUser = {
-                id: user['id'],
-                firstName: user['firstName'],
+                id: user['userid'],
+                firstName: user['firstname'],
                 email: user['email'],
-                loggedIn: true,
-                avatar_url: user['avatar_url']
+                avatar_url: user['avatar'],
+                loggedIn: true
             }
         }
+        console.log(this.loggedInUser);
         return this.loggedInUser;
     }
 

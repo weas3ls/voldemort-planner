@@ -35,10 +35,12 @@ export class LoginComponent implements OnInit {
     }
 
     async submit() {
+        console.log(this.email);
         const credentials = {
-            email: this.email.value,
-            password: this.password.value
+            username: this.email,
+            password: this.password
         };
+        console.log(credentials);
         this.user = await this.loginService.login(credentials);
         if (this.user) {
             this.loggedIn = this.user.loggedIn;
