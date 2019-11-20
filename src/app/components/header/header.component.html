@@ -2,8 +2,9 @@
     <mdb-navbar-brand>
         <a class="navbar-brand h1 mb-0" [routerLink]="['/']" routerLinkActive="router-link-active">The Dark Lord's Planner</a>
     </mdb-navbar-brand>
-    <links *ngIf="loggedIn">
-        <ul class="navbar-nav ml-auto nav-flex-icons">
+    <links>
+        <button type="button" mdbBtn color="success" class="ml-auto" (click)="mitchModal.show()" mdbWavesEffect>Mitch</button>
+        <ul class="navbar-nav ml-auto nav-flex-icons" *ngIf="loggedIn; else notLoggedIn">
             <li class="nav-item">
                 <a class="nav-link">1 <mdb-icon fas icon="envelope"></mdb-icon></a>
             </li>
@@ -17,4 +18,33 @@
             </li>
         </ul>
     </links>
+    <ng-template #notLoggedIn>
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item">
+                <button type="button" mdbBtn color="elegant" [routerLink]="['/login']" routerLinkActive="router-link-active" mdbWavesEffect>Login</button>
+            </li>
+            <li class="nav-item">
+                <button type="button" mdbBtn color="elegant" [routerLink]="['/register']" routerLinkActive="router-link-active" mdbWavesEffect>Register</button>
+            </li>
+        </ul>
+    </ng-template>
 </mdb-navbar>
+
+<div mdbModal #mitchModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mitchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-success" role="document">
+        <div class="modal-content">
+            <div class="modal-header white-text">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="mitchModal.hide()">
+                <span aria-hidden="true" class="white-text">×</span>
+              </button>
+                <h1 class="modal-title w-100" id="myModalLabel">Mitch</h1>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <mdb-icon fas icon="check-circle" size="4x" class="mb-3 animated rotateIn"></mdb-icon>
+                    <p class="lead">is a Great Guy</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

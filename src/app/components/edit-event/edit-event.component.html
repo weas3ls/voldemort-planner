@@ -1,0 +1,73 @@
+<div class="row p-5">
+    <div class="col-12 col-lg-9 mx-lg-auto">
+        <h1 class="h1">Edit Event</h1>
+    </div>
+    <div class="col-12 col-lg-7 mx-lg-auto">
+        <form>
+            <div class="row">
+                <div class="col-12">
+                    <div class="md-form">
+                        <input mdbInput type="text" name="title" [(ngModel)]="title" class="form-control white-text">
+                        <label class="white-text" for="title">Event Title</label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="md-form">
+                        <mdb-date-picker name="startDate" [options]="datePickerOptions" [placeholder]="'Start date'" [(ngModel)]="startDate" required></mdb-date-picker>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="md-form">
+                        <mdb-time-picker [buttonLabel]="'Done'" [twelvehour]="true" [placeholder]="'Start time'" name="startTime" [(ngModel)]="startTime" required></mdb-time-picker>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="md-form">
+                        <mdb-date-picker name="endDate" [options]="datePickerOptions" [placeholder]="'End date'" [(ngModel)]="endDate" required></mdb-date-picker>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="md-form">
+                        <mdb-time-picker [buttonLabel]="'Done'" [twelvehour]="true" [placeholder]="'End time'" name="endTime" [(ngModel)]="endTime" required></mdb-time-picker>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="md-form">
+                        <textarea type="text" name="description" [(ngModel)]="description" class="md-textarea form-control white-text" mdbInput required></textarea>
+                        <label class="white-text" for="description">Description</label>
+                    </div>
+                </div>
+                <div class="col-12 text-right">
+                    <div class="row">
+                        <div class="col-12 col-lg-10">
+                            <div class="md-form">
+                                <input type="text" [(ngModel)]='location.address_level_1' [ngModelOptions]="{standalone: true}" class="form-control white-text" id="searchField" mdbInput>
+                                <label class="white-text" for="searchField">Search location</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-2">
+                            <div class="md-form">
+                                <button mdbBtn color="primary" mdbWavesLight (click)='updateOnMap()' class="ml-auto" type="submit">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <agm-map #map [mapTypeId]="'hybrid'" [latitude]="location.lat" [longitude]="location.lng" style="height: 300px">
+                        <agm-marker [latitude]="location.lat" [longitude]="location.lng">
+                            <agm-info-window #window>
+                                <h6>Longitude: {{ location.marker.lng }}</h6>
+                                <h6>Latitude: {{ location.marker.lat }}</h6>
+                            </agm-info-window>
+                        </agm-marker>
+                    </agm-map>
+                </div>
+            </div>
+            <div class="row pt-md-5 text-right">
+                <div class="col-12">
+                    <button type="submit" mdbBtn color="black" mdbWavesEffect>Create Event</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

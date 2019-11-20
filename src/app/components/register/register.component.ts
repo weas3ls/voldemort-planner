@@ -1,3 +1,4 @@
+import { RegisterService } from './../../services/register/register.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -18,7 +19,10 @@ export class RegisterComponent implements OnInit {
     password: any;
     confirmPassword: any;
 
-    constructor(private toastrService: ToastService) { }
+    constructor(
+        private toastrService: ToastService,
+        private registerService: RegisterService
+    ) { }
 
     ngOnInit() {
         this.validatingForm = new FormGroup({
@@ -31,19 +35,29 @@ export class RegisterComponent implements OnInit {
     }
 
     get credentials() {
-        if (this.password == this.confirmPassword) {
-            const credentials = {
-                firstName: this.firstName,
-                lastName: this.lastName,
-                email: this.email,
-                password: this.password,
-                confirmPassword: this.confirmPassword
-            }
-            console.log(credentials);
-            return credentials;
-        } else {
+        if (!this.firstName || !this.lastName || !this.email) {
             const options = { opacity: 1, progressBar: true, timeOut: 3000, closeButton: true };
-            this.toastrService.error('Your passwords don\'t match!', 'Hey!', options);
+            this.toastrService.error('Fill out all the fields!', 'Hey!', options);
+        } else {
+            if (this.password == this.confirmPassword) {
+                const credentials = {
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    email: this.email,
+                    password: this.password,
+                    confirmPassword: this.confirmPassword
+                }
+                return credentials;
+            } else {
+                const options = { opacity: 1, progressBar: true, timeOut: 3000, closeButton: true };
+                this.toastrService.error('Your passwords don\'t match!', 'Hey!', options);
+                return;
+            }
         }
+    }
+
+    async register() {
+        const credentials = this.credentials;
+        const user = await this.registerService.register(credentials);
     }
 }

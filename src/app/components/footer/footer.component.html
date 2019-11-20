@@ -2,26 +2,24 @@
     <div class="container-fluid text-center text-md-left">
         <div class="row">
             <div class="col-md-6 mt-md-0 mt-3">
-                <h5 class="text-uppercase">Footer Content</h5>
-                <p>Here you can use rows and columns here to organize your footer content.</p>
+                <blockquote class="blockquote ml-lg-4 pl-lg-3 red-text">
+                    <p class="mb-0">How many will be brave enough to return when they feel it?<br>The Dark Mark on their arms burning black?<br>...and how many will be foolish enough to stay away?</p>
+                    <footer class="blockquote-footer mb-3 text-white-50">Lord Voldemort <cite title="The Goblet of Fire">The Goblet of Fire</cite></footer>
+                </blockquote>
             </div>
             <hr class="clearfix w-100 d-md-none pb-3">
             <div class="col-md-3 mb-md-0 mb-3">
-                <h5 class="text-uppercase">Links</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#!">Link 1</a></li>
-                    <li><a href="#!">Link 2</a></li>
-                    <li><a href="#!">Link 3</a></li>
-                    <li><a href="#!">Link 4</a></li>
+                    <li><a [routerLink]="['/faq']" routerLinkActive="router-link-active">FAQ</a></li>
+                    <li><a [routerLink]="['/death-eater-anthem']" routerLinkActive="router-link-active">Death Eater Anthem</a></li>
+                    <li><a [routerLink]="['/how-to-be-a-death-eater']" routerLinkActive="router-link-active">How to be a Death Eater</a></li>
+                    <li><a [routerLink]="['/terms-of-service']" routerLinkActive="router-link-active">Terms of Service</a></li>
                 </ul>
             </div>
             <div class="col-md-3 mb-md-0 mb-3">
-                <h5 class="text-uppercase">Links</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#!">Link 1</a></li>
-                    <li><a href="#!">Link 2</a></li>
-                    <li><a href="#!">Link 3</a></li>
-                    <li><a href="#!">Link 4</a></li>
+                    <li><a [routerLink]="['/register']" routerLinkActive="router-link-active">Register</a></li>
+                    <li><a [routerLink]="['/login']" routerLinkActive="router-link-active">Login</a></li>
                 </ul>
             </div>
         </div>
