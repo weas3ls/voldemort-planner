@@ -1,8 +1,9 @@
-import { RegisterService } from './../../services/register/register.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { ToastService } from 'ng-uikit-pro-standard';
+
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
     selector: 'app-register',
@@ -21,7 +22,7 @@ export class RegisterComponent implements OnInit {
 
     constructor(
         private toastrService: ToastService,
-        private registerService: RegisterService
+        private userService: UserService
     ) { }
 
     ngOnInit() {
@@ -58,6 +59,6 @@ export class RegisterComponent implements OnInit {
 
     async register() {
         const credentials = this.credentials;
-        const user = await this.registerService.register(credentials);
+        const user = await this.userService.register(credentials);
     }
 }

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { LoginService } from './../../services/login/login.service';
-import { User } from './../models/User';
 import { ToastService } from 'ng-uikit-pro-standard';
+
+import { User } from './../models/User';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
     selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
     password: any;
 
     constructor(
-        private loginService: LoginService,
+        private userService: UserService,
         private router: Router,
         private route: ActivatedRoute,
         private toastrService: ToastService
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit {
             password: this.password
         };
         console.log(credentials);
-        this.user = await this.loginService.login(credentials);
+        this.user = await this.userService.login(credentials);
         if (this.user) {
             this.loggedIn = this.user.loggedIn;
             this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/profile';

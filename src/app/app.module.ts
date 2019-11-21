@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { MDBBootstrapModulesPro, MDBSpinningPreloader, ToastModule } from 'ng-uikit-pro-standard';
+import { MdbFileUploadModule } from "mdb-file-upload";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import { CreateEventComponent } from './components/create-event/create-event.com
 import { HowToBeADeathEaterComponent } from './components/how-to-be-a-death-eater/how-to-be-a-death-eater.component';
 import { FAQComponent } from './components/faq/faq.component';
 import { DeathEaterAnthemComponent } from './components/death-eater-anthem/death-eater-anthem.component';
+import { ViewEventComponent } from './components/view-event/view-event.component';
 
 @NgModule({
     declarations: [
@@ -33,7 +35,8 @@ import { DeathEaterAnthemComponent } from './components/death-eater-anthem/death
         TermsOfServiceComponent,
         HowToBeADeathEaterComponent,
         FAQComponent,
-        DeathEaterAnthemComponent
+        DeathEaterAnthemComponent,
+        ViewEventComponent
     ],
     imports: [
         BrowserModule,
@@ -43,6 +46,7 @@ import { DeathEaterAnthemComponent } from './components/death-eater-anthem/death
         AppRoutingModule,
         MDBBootstrapModulesPro.forRoot(),
         ToastModule.forRoot(),
+        MdbFileUploadModule,
         BrowserAnimationsModule
     ],
     providers: [
@@ -60,6 +64,8 @@ import { DeathEaterAnthemComponent } from './components/death-eater-anthem/death
         TermsOfServiceComponent,
         HowToBeADeathEaterComponent,
         FAQComponent,
-        DeathEaterAnthemComponent]
+        DeathEaterAnthemComponent,
+        ViewEventComponent
+    ]
 })
 export class AppModule { }

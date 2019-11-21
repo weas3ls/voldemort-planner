@@ -37,30 +37,29 @@
                         <label class="white-text" for="description">Description</label>
                     </div>
                 </div>
-                <div class="col-12 text-right">
-                    <div class="row">
-                        <div class="col-12 col-lg-10">
-                            <div class="md-form">
-                                <input type="text" [(ngModel)]='location.address_level_1' [ngModelOptions]="{standalone: true}" class="form-control white-text" id="searchField" mdbInput>
-                                <label class="white-text" for="searchField">Search location</label>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-2">
-                            <div class="md-form">
-                                <button mdbBtn color="primary" mdbWavesLight (click)='updateOnMap()' class="ml-auto" type="submit">Search</button>
-                            </div>
-                        </div>
+                <div class="col-12">
+                    <div class="md-form">
+                        <input mdbInput type="text" name="location" [(ngModel)]="location" class="form-control">
+                        <label for="location">Location</label>
                     </div>
                 </div>
                 <div class="col-12">
-                    <agm-map #map [mapTypeId]="'hybrid'" [latitude]="location.lat" [longitude]="location.lng" style="height: 300px">
-                        <agm-marker [latitude]="location.lat" [longitude]="location.lng">
-                            <agm-info-window #window>
-                                <h6>Longitude: {{ location.marker.lng }}</h6>
-                                <h6>Latitude: {{ location.marker.lat }}</h6>
-                            </agm-info-window>
-                        </agm-marker>
-                    </agm-map>
+                    <label class="mb-0 ml-2" for="address">Address (google maps url)</label>
+                    <div class="md-form input-group mt-0 mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text md-addon white-text" id="address-addon">https://www.google.com/maps/place/</span>
+                        </div>
+                        <input type="text" class="form-control" name="address" [(ngModel)]="address" aria-describedby="address-addon" placeholder="Everything after *place/*">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="md-form">
+                        <a mdbBtn href="https://maps.google.com" role="button" color="primary" class="white-text" target="_blank" mdbWavesEffect>Go to Google Maps</a>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label for="">Image (not required)</label>
+                    <mdb-file-upload (fileRemoved)="onFileRemove()" (fileAdded)="onFileAdd($event)"></mdb-file-upload>
                 </div>
             </div>
             <div class="row pt-md-5 text-right">

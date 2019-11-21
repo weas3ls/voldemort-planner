@@ -1,8 +1,41 @@
 <div class="row p-5">
     <div class="col-12 col-lg-9 mx-lg-auto">
-        <h1 class="h1">My Events</h1>
+        <h1 class="h1">My Events (Created)</h1>
     </div>
-    <div class="row text-center">
+    <div class="col-12 col-lg-7 mx-lg-auto">
+        <div class="list-group" *ngIf="createdEvents; else empty">
+            <div *ngFor="let createdEvent of createdEvents" [routerLink]="['event, createdEvent.id']" routerLinkActive="router-link-active" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ createdEvent.title }}</h5>
+                    <small>Created {{ createdEvent.dateCreated }}</small>
+                </div>
+                <p class="mb-1">{{ createdEvent.description }}</p>
+                <small>Event dates: {{ createdEvent.startDate }} - {{ createdEvent.endDate }}</small>
+                <a class="mb-1" href="{{ createdEvent.address }}">{{ createdEvent.location }}</a>
+            </div>
+        </div>
+        <ng-template #empty>
+            <p class="h2">Lord Voldemort does not tolerate anti-social behavior</p>
+            <a type="button" mdbBtn color="primary" [routerLink]="['/create-event']" routerLinkActive="router-link-active" mdbWavesEffect>Create Event</a>
+        </ng-template>
+    </div>
+    <div class="col-12 col-lg-9 mx-lg-auto mt-lg-5">
+        <h1 class="h1">My Events (Attending)</h1>
+    </div>
+    <div class="col-12 col-lg-7 mx-lg-auto">
+        <div class="list-group" *ngIf="otherEvents; else empty">
+            <div *ngFor="let otherEvent of otherEvents" [routerLink]="['event, otherEvent.id']" routerLinkActive="router-link-active" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ otherEvent.title }}</h5>
+                    <small>Created {{ otherEvent.dateCreated }}</small>
+                </div>
+                <p class="mb-1">{{ otherEvent.description }}</p>
+                <small>Event dates: {{ otherEvent.startDate }} - {{ otherEvent.endDate }}</small>
+                <a class="mb-1" href="{{ otherEvent.address }}">{{ otherEvent.location }}</a>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row text-center">
         <div class="col-md-4">
             <div class="btn-group">
                 <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
@@ -33,7 +66,7 @@
             </div>
         </div>
     </div>
-    <br />
+    <br /> -->
     <!-- <div [ngSwitch]="view">
             <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
             </mwl-calendar-month-view>
