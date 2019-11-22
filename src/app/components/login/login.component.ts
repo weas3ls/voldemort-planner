@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { ToastService } from 'ng-uikit-pro-standard';
 
-import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 import { User } from './../models/User';
@@ -19,7 +18,6 @@ export class LoginComponent implements OnInit {
 
     loggedIn: boolean = false;
     validatingForm: FormGroup;
-    userData: Subscription;
     loggedInUser: User;
     returnUrl: string = '/';
     username: any;

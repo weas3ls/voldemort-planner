@@ -1,14 +1,12 @@
 import { Time } from '@angular/common';
 
 export interface Event {
-    id: number;
+    event_id: number;
     title: string;
     description: string;
     address: string;
     location: string;
-    dateCreated: Date;
-    startDate: Date;
-    endDate: Date;
+    created: Date;
     startTime: Time;
     endTime: Time;
     visibility: number;

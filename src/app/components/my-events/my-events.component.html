@@ -1,22 +1,24 @@
 <div class="row p-5">
+    <div class="col-12 col-lg-4 ml-lg-auto">
+        <a type="button" mdbBtn color="primary" [routerLink]="['/create-event']" routerLinkActive="router-link-active" mdbWavesEffect>Create Event</a>
+    </div>
     <div class="col-12 col-lg-9 mx-lg-auto">
         <h1 class="h1">My Events (Created)</h1>
     </div>
     <div class="col-12 col-lg-7 mx-lg-auto">
         <div class="list-group list-group-flush" *ngIf="createdEvents; else empty">
-            <div *ngFor="let createdEvent of createdEvents" [routerLink]="['event, createdEvent.id']" routerLinkActive="router-link-active" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div *ngFor="let createdEvent of createdEvents" class="list-group-item flex-column align-items-start rgba-black-strong white-text">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{ createdEvent.title }}</h5>
-                    <small>Created {{ createdEvent.dateCreated }}</small>
+                    <a class="h5 mb-1 white-text" [routerLink]="['/edit-event', createdEvent.event_id]" routerLinkActive="router-link-active">{{ createdEvent.title }}</a>
+                    <small>Created {{ createdEvent.created | date: 'medium' }}</small>
                 </div>
-                <p class="mb-1">{{ createdEvent.description }}</p>
-                <small>Event dates: {{ createdEvent.startDate }} - {{ createdEvent.endDate }}</small>
-                <a class="mb-1" href="{{ createdEvent.address }}">{{ createdEvent.location }}</a>
+                <p class="mb-1 lead">{{ createdEvent.description }}</p>
+                <p mdbTooltip="{{ createdEvent.startTime | date: 'h:mm aaaaa Z' }} - {{ createdEvent.endTime | date: 'h:mm aaaaa Z' }}" placement="top" class="d-inline-block">Event dates: {{ createdEvent.startTime | date: 'E, LLL d, yy' }} - {{ createdEvent.endTime | date: 'E, LLL d, yy' }}</p>
+                <a class="red-text d-block" href="https://www.google.com/maps/place/{{ createdEvent.address }}" target="_blank">{{ createdEvent.location }}</a>
             </div>
         </div>
         <ng-template #empty>
             <p class="h2">Lord Voldemort does not tolerate anti-social behavior</p>
-            <a type="button" mdbBtn color="primary" [routerLink]="['/create-event']" routerLinkActive="router-link-active" mdbWavesEffect>Create Event</a>
         </ng-template>
     </div>
     <div class="col-12 col-lg-9 mx-lg-auto mt-lg-5">
@@ -24,125 +26,15 @@
     </div>
     <div class="col-12 col-lg-7 mx-lg-auto">
         <div class="list-group" *ngIf="otherEvents; else empty">
-            <div *ngFor="let otherEvent of otherEvents" [routerLink]="['event, otherEvent.id']" routerLinkActive="router-link-active" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div *ngFor="let otherEvent of otherEvents" class="list-group-item flex-column align-items-start rgba-black-strong white-text">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{ otherEvent.title }}</h5>
-                    <small>Created {{ otherEvent.dateCreated }}</small>
+                    <a class="h5 mb-1 white-text" [routerLink]="['/event', otherEvent.event_id]" routerLinkActive="router-link-active">{{ otherEvent.title }}</a>
+                    <small>other {{ otherEvent.created | date: 'medium' }}</small>
                 </div>
-                <p class="mb-1">{{ otherEvent.description }}</p>
-                <small>Event dates: {{ otherEvent.startDate }} - {{ otherEvent.endDate }}</small>
-                <a class="mb-1" href="{{ otherEvent.address }}">{{ otherEvent.location }}</a>
+                <p class="mb-1 lead">{{ otherEvent.description }}</p>
+                <p mdbTooltip="{{ otherEvent.startTime | date: 'h:mm aaaaa Z' }} - {{ otherEvent.endTime | date: 'h:mm aaaaa Z' }}" placement="top" class="d-inline-block">Event dates: {{ otherEvent.startTime | date: 'E, LLL d, yy' }} - {{ otherEvent.endTime | date: 'E, LLL d, yy' }}</p>
+                <a class="red-text d-block" href="https://www.google.com/maps/place/{{ otherEvent.address }}" target="_blank">{{ otherEvent.location }}</a>
             </div>
         </div>
     </div>
-    <!-- <div class="row text-center">
-        <div class="col-md-4">
-            <div class="btn-group">
-                <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
-                    Previous
-                </div>
-                <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
-                    Today
-                </div>
-                <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
-                    Next
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
-        </div>
-        <div class="col-md-4">
-            <div class="btn-group">
-                <div class="btn btn-primary" (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">
-                    Month
-                </div>
-                <div class="btn btn-primary" (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">
-                    Week
-                </div>
-                <div class="btn btn-primary" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
-                    Day
-                </div>
-            </div>
-        </div>
-    </div>
-    <br /> -->
-    <!-- <div [ngSwitch]="view">
-            <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
-            </mwl-calendar-month-view>
-            <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
-            </mwl-calendar-week-view>
-            <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
-            </mwl-calendar-day-view>
-        </div> -->
-
-    <!-- <br /><br /><br />
-
-        <h3>
-            Edit events
-            <button class="btn btn-primary pull-right" (click)="addEvent()">
-                Add new
-            </button>
-            <div class="clearfix"></div>
-        </h3>
-
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Primary color</th>
-                        <th>Secondary color</th>
-                        <th>Starts at</th>
-                        <th>Ends at</th>
-                        <th>Remove</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr *ngFor="let event of events">
-                        <td>
-                            <input type="text" class="form-control" [(ngModel)]="event.title" (keyup)="refresh.next()" />
-                        </td>
-                        <td>
-                            <input type="color" [(ngModel)]="event.color.primary" (change)="refresh.next()" />
-                        </td>
-                        <td>
-                            <input type="color" [(ngModel)]="event.color.secondary" (change)="refresh.next()" />
-                        </td>
-                        <td>
-                            <input class="form-control" type="text" mwlFlatpickr [(ngModel)]="event.start" (ngModelChange)="refresh.next()" dateFormat="Y-m-dTH:i" altFormat="F j, Y H:i" placeholder="Not set" />
-                        </td>
-                        <td>
-                            <input class="form-control" type="text" mwlFlatpickr [(ngModel)]="event.end" (ngModelChange)="refresh.next()" dateFormat="Y-m-dTH:i" altFormat="F j, Y H:i" placeholder="Not set" />
-                        </td>
-                        <td>
-                            <button class="btn btn-danger" (click)="deleteEvent(event)">
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <ng-template #modalContent let-close="close">
-            <div class="modal-header">
-                <h5 class="modal-title">Event action occurred</h5>
-                <button type="button" class="close" (click)="close()"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body">
-                <div>
-                    Action:
-                    <pre>{{ modalData?.action }}</pre>
-                </div>
-                <div>
-                    Event:
-                    <pre>{{ modalData?.event | json }}</pre>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button>
-            </div>
-        </ng-template> -->
 </div>
-<!-- </div> -->
