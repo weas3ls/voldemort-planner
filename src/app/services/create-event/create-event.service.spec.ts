@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { JwtInterceptorService } from './jwt-interceptor.service';
+import { CreateEventService } from './create-event.service';
 
-describe('JwtInterceptorService', () => {
+describe('CreateEventService', () => {
     beforeEach(() => TestBed.configureTestingModule({}));
 
     it('should be created', () => {
-        const service: JwtInterceptorService = TestBed.get(JwtInterceptorService);
+        const service: CreateEventService = TestBed.get(CreateEventService);
         expect(service).toBeTruthy();
     });
 });

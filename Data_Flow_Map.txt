@@ -1,0 +1,33 @@
+AttendantsController - attend/*
+	Creation - attend/1
+		AttendantCreateRequest ->
+			<- Attendants
+	GetByUserId - attend/2	
+		UserID ->
+			<- List<Events>
+
+AuthController - auth
+	AuthUser - auth
+		Credentials ->
+			<- UserReponse (with JWTHeader)
+
+EventController - events/*
+	CreateEvent - events/1
+		Event ->
+			<- Event
+	UpdateEvent - events/2
+		Event ->
+			<- Event
+	DeleteEVent - events/3
+		Event ->
+			<- int code
+
+UserController - users/*
+	Create User - users/1
+		UserRegistration ->
+			<- UserResponse
+
+	Get Users by EventID - users/2
+		int EventId ->
+			<- []Users
+

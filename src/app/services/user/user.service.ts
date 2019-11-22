@@ -22,7 +22,7 @@ export class UserService {
     }
 
     register(credentials: any) {    
-        const url = 'http://localhost:8001/users';
+        const url = 'http://localhost:8001/users/1';
         return this.httpClient.post(url, credentials).pipe(map(user => {
             this.userSubject.next(user);
             return user;

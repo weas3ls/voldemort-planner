@@ -8,7 +8,7 @@ import { UserService } from '../user/user.service';
 @Injectable({
     providedIn: 'root'
 })
-export class JwtInterceptor implements HttpInterceptor {
+export class JwtInterceptorService implements HttpInterceptor {
 
     constructor( private userService: UserService ) { }
 
@@ -16,10 +16,10 @@ export class JwtInterceptor implements HttpInterceptor {
         // add authorization header with jwt token if available
         let currentUser = this.userService.currentUserValue;
         console.log(currentUser);
-        if (currentUser && currentUser.token) {
+        if (currentUser && currentUser.jwt) {
             request = request.clone({
                 setHeaders: {
-                    Authorization: `Bearer ${currentUser.token}`
+                    Authorization: `Bearer ${currentUser.jwt}`
                 }
             });
         }

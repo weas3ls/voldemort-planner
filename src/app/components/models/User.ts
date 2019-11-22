@@ -3,5 +3,5 @@ export interface User {
     firstname;
     email;
     avatar;
-    token;
+    jwt;
 }
