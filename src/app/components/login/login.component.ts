@@ -4,6 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { ToastService } from 'ng-uikit-pro-standard';
 
+import { Subscription } from 'rxjs';
+import { first } from 'rxjs/operators';
+
 import { User } from './../models/User';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -16,9 +19,10 @@ export class LoginComponent implements OnInit {
 
     loggedIn: boolean = false;
     validatingForm: FormGroup;
-    user: User;
+    userData: Subscription;
+    loggedInUser: User;
     returnUrl: string = '/';
-    email: any;
+    username: any;
     password: any;
 
     constructor(
@@ -30,31 +34,25 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.validatingForm = new FormGroup({
-            email: new FormControl('', Validators.email),
+            username: new FormControl('', Validators.email),
             password: new FormControl('', Validators.required)
+        });
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/my-events';
+    }
+
+    onSubmit() {
+        this.userService.login(this.validatingForm.value).pipe(first()).subscribe(user=> {
+            this.router.navigate([this.returnUrl]);
+        },
+        error => {
+            console.log(error);
+            const options = { opacity: 1, progressBar: true, timeOut: 3000, closeButton: true };
+            this.toastrService.error('A true death eater would remember their password...', 'Wrong Credentials!', options);
         });
     }
 
-    async submit() {
-        console.log(this.email);
-        const credentials = {
-            username: this.email,
-            password: this.password
-        };
-        console.log(credentials);
-        this.user = await this.userService.login(credentials);
-        if (this.user) {
-            this.loggedIn = this.user.loggedIn;
-            this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/profile';
-        } else {
-            const options = { opacity: 1, progressBar: true, timeOut: 3000, closeButton: true, toastClass: 'pink' };
-            this.toastrService.error('Login Failed!', 'Sorry!', options);
-        }
-        this.router.navigateByUrl(this.returnUrl);
-    }
-
     logout() {
-        this.user = null;
+        this.loggedInUser = null;
         this.router.navigateByUrl(this.returnUrl);
     }
 }

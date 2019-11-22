@@ -3,7 +3,7 @@
         <h1 class="h1">My Events (Created)</h1>
     </div>
     <div class="col-12 col-lg-7 mx-lg-auto">
-        <div class="list-group" *ngIf="createdEvents; else empty">
+        <div class="list-group list-group-flush" *ngIf="createdEvents; else empty">
             <div *ngFor="let createdEvent of createdEvents" [routerLink]="['event, createdEvent.id']" routerLinkActive="router-link-active" class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{{ createdEvent.title }}</h5>

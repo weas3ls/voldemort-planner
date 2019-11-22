@@ -5,22 +5,22 @@
                 <h1 class="h1 my-0">Login</h1>
             </mdb-card-header>
             <mdb-card-body class="px-lg-5 pt-0 elegant-color">
-                <form class="text-center">
+                <form class="text-center" [formGroup]="validatingForm" (ngSubmit)="onSubmit()">
                     <div class="row">
                         <div class="col-12">
                             <div class="md-form mb-0">
-                                <input type="email" name="email" [(ngModel)]="email" class="form-control white-text" mdbInput mdbValidate>
-                                <label class="white-text" for="email">Email</label>
+                                <input type="email" name="username" formControlName="username" class="form-control white-text" mdbInput mdbValidate>
+                                <label class="white-text" for="username">Email</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="md-form">
-                                <input type="password" name="password" [(ngModel)]="password" class="form-control white-text" mdbInput mdbValidate>
+                                <input type="password" name="password" formControlName="password" class="form-control white-text" mdbInput mdbValidate>
                                 <label class="white-text" for="password">Password</label>
                             </div>
                         </div>
                         <div class="col-12">
-                            <button mdbBtn color="black" rounded="true" block="true" class="my-4 waves-effect z-depth-0" mdbWavesEffect type="submit" (click)="submit()">Login</button>
+                            <button mdbBtn color="black" rounded="true" block="true" class="my-4 waves-effect z-depth-0" mdbWavesEffect type="submit">Login</button>
                         </div>
                     </div>
                     <hr>

@@ -1,19 +1,19 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar ie-nav" [containerInside]="false">
     <mdb-navbar-brand>
-        <a class="navbar-brand h1 mb-0" [routerLink]="['/']" routerLinkActive="router-link-active">The Dark Lord's Planner</a>
+        <a class="navbar-brand h1 mb-0" [routerLink]="['/my-events']" routerLinkActive="router-link-active">The Dark Lord's Planner</a>
     </mdb-navbar-brand>
     <links>
         <button type="button" mdbBtn color="success" class="ml-auto" (click)="mitchModal.show()" mdbWavesEffect>Mitch</button>
-        <ul class="navbar-nav ml-auto nav-flex-icons" *ngIf="loggedIn; else notLoggedIn">
+        <ul class="navbar-nav ml-auto nav-flex-icons" *ngIf="user; else notLoggedIn">
             <li class="nav-item">
                 <a class="nav-link">1 <mdb-icon fas icon="envelope"></mdb-icon></a>
             </li>
             <li class="nav-item avatar dropdown" dropdown>
                 <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" alt="" class="img-fluid rounded-circle z-depth-0"></a>
+                    <img src="{{ user.avatar }}" alt="" class="img-fluid rounded-circle z-depth-0">{{ user.token }}</a>
                 <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">My account</a>
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Log out</a>
+                    <a class="dropdown-item waves-light" [routerLink]="['/my-account']" routerLinkActive="router-link-active" mdbWavesEffect>My account</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)="logout()">Log out</a>
                 </div>
             </li>
         </ul>

@@ -5,41 +5,41 @@
                 <h1 class="h1 my-0">Register</h1>
             </mdb-card-header>
             <mdb-card-body class="px-lg-5 elegant-color white-text">
-                <form class="text-center">
+                <form class="text-center" [formGroup]="validatingForm" (ngSubmit)="onSubmit()">
                     <div class="row">
                         <div class="col-12">
                             <div class="md-form">
-                                <input type="text" [(ngModel)]="firstName" name="firstName" class="form-control white-text" mdbInput>
+                                <input type="text" formControlName="firstName" name="firstName" class="form-control white-text" mdbInput>
                                 <label class="white-text" for="firstName">First name</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="md-form">
-                                <input type="email" [(ngModel)]="lastName" name="lastName" class="form-control white-text" mdbInput>
+                                <input type="email" formControlName="lastName" name="lastName" class="form-control white-text" mdbInput>
                                 <label class="white-text" for="lastName">Last name</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="md-form">
-                                <input type="email" [(ngModel)]="email" name="email" class="form-control white-text" mdbInput>
+                                <input type="email" formControlName="email" name="email" class="form-control white-text" mdbInput>
                                 <label class="white-text" for="email">E-mail</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="md-form">
-                                <input type="password" [(ngModel)]="password" name="password" class="form-control white-text" mdbInput>
+                                <input type="password" formControlName="password" name="password" class="form-control white-text" mdbInput>
                                 <label class="white-text" for="password">Password</label>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="md-form">
-                                <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" class="form-control white-text" mdbInput>
+                                <input type="password" formControlName="confirmPassword" name="confirmPassword" class="form-control white-text" mdbInput>
                                 <label class="white-text" for="confirmPassword">Confirm Password</label>
                             </div>
                         </div>
                     </div>
                     <div class="md-form">
-                        <button mdbBtn color="black" rounded="true" block="true" class="waves-effect z-depth-0" mdbWavesEffect (click)="register()">Register</button>
+                        <button mdbBtn color="black" rounded="true" block="true" class="waves-effect z-depth-0" mdbWavesEffect type="submit">Register</button>
                     </div>
                 </form>
                 <p>By clicking <em>Register</em> you agree to our <a class="blue-text" data-toggle="modal" data-target="#terms-of-service-modal" (click)="frame.show()">terms of service</a></p>

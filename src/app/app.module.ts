@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MDBBootstrapModulesPro, MDBSpinningPreloader, ToastModule } from 'ng-uikit-pro-standard';
 import { MdbFileUploadModule } from "mdb-file-upload";
@@ -14,13 +15,15 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
 import { MyEventsComponent } from './components/my-events/my-events.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-service.component';
-import { EditEventComponent } from './components/edit-event/edit-event.component';
 import { CreateEventComponent } from './components/create-event/create-event.component';
+import { EditEventComponent } from './components/edit-event/edit-event.component';
+import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-service.component';
 import { HowToBeADeathEaterComponent } from './components/how-to-be-a-death-eater/how-to-be-a-death-eater.component';
 import { FAQComponent } from './components/faq/faq.component';
 import { DeathEaterAnthemComponent } from './components/death-eater-anthem/death-eater-anthem.component';
 import { ViewEventComponent } from './components/view-event/view-event.component';
+import { MyAccountComponent } from './components/my-account/my-account.component';
+import { JwtInterceptor } from './services/jwt-interceptor/jwt-interceptor.service';
 
 @NgModule({
     declarations: [
@@ -36,7 +39,8 @@ import { ViewEventComponent } from './components/view-event/view-event.component
         HowToBeADeathEaterComponent,
         FAQComponent,
         DeathEaterAnthemComponent,
-        ViewEventComponent
+        ViewEventComponent,
+        MyAccountComponent
     ],
     imports: [
         BrowserModule,
@@ -51,6 +55,7 @@ import { ViewEventComponent } from './components/view-event/view-event.component
     ],
     providers: [
         MDBSpinningPreloader,
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     ],
     bootstrap: [
         AppComponent,
@@ -65,7 +70,8 @@ import { ViewEventComponent } from './components/view-event/view-event.component
         HowToBeADeathEaterComponent,
         FAQComponent,
         DeathEaterAnthemComponent,
-        ViewEventComponent
+        ViewEventComponent,
+        MyAccountComponent
     ]
 })
 export class AppModule { }

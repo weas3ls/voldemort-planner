@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, DefaultValueAccessor } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { ToastService } from 'ng-uikit-pro-standard';
+
+import { first } from 'rxjs/operators';
 
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -19,11 +22,19 @@ export class RegisterComponent implements OnInit {
     email: any;
     password: any;
     confirmPassword: any;
+    avatar: string = 'https://middle.pngfans.com/20190711/p/harry-potter-dark-mark-png-harry-potter-death-eate-476e858b044d85b8.jpg';
+    options = { opacity: 1, progressBar: true, timeOut: 3000, closeButton: true };
 
     constructor(
         private toastrService: ToastService,
-        private userService: UserService
-    ) { }
+        private userService: UserService,
+        private router: Router,
+    ) {
+        // redirect to home if already logged in
+        if (this.userService.currentUserValue) {
+            this.router.navigate(['/']);
+        }
+    }
 
     ngOnInit() {
         this.validatingForm = new FormGroup({
@@ -31,34 +42,21 @@ export class RegisterComponent implements OnInit {
             firstName: new FormControl(null, [Validators.required]),
             lastName: new FormControl(null, [Validators.required]),
             password: new FormControl(null, [Validators.required]),
-            confirmPassword: new FormControl(null, [Validators.required])
+            confirmPassword: new FormControl(null, [Validators.required]),
         });
     }
 
-    get credentials() {
-        if (!this.firstName || !this.lastName || !this.email) {
-            const options = { opacity: 1, progressBar: true, timeOut: 3000, closeButton: true };
-            this.toastrService.error('Fill out all the fields!', 'Hey!', options);
-        } else {
-            if (this.password == this.confirmPassword) {
-                const credentials = {
-                    firstName: this.firstName,
-                    lastName: this.lastName,
-                    email: this.email,
-                    password: this.password,
-                    confirmPassword: this.confirmPassword
-                }
-                return credentials;
-            } else {
-                const options = { opacity: 1, progressBar: true, timeOut: 3000, closeButton: true };
-                this.toastrService.error('Your passwords don\'t match!', 'Hey!', options);
-                return;
-            }
+    onSubmit() {
+        if (this.validatingForm.invalid) {
+            return;
         }
-    }
-
-    async register() {
-        const credentials = this.credentials;
-        const user = await this.userService.register(credentials);
+        this.validatingForm['avatar_url'] = 'https://middle.pngfans.com/20190711/p/harry-potter-dark-mark-png-harry-potter-death-eate-476e858b044d85b8.jpg';
+        this.userService.register(this.validatingForm.value).pipe(first()).subscribe(data => {
+            this.toastrService.success('Registration successful', 'Welcome!', this.options);
+            this.router.navigate(['/my-events']);
+        },
+        error => {
+            this.toastrService.error('Registration failed!', 'Very interesting', this.options);
+        });
     }
 }

@@ -4,17 +4,22 @@ import { CanActivate, CanLoad, Router, ActivatedRouteSnapshot, RouterStateSnapsh
 import { ToastService } from 'ng-uikit-pro-standard';
 
 import { UserService } from '../user/user.service';
+import { User } from 'src/app/components/models/User';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserGuardService implements CanActivate, CanLoad {
+    
+    user: User = null;
 
     constructor(
         private userService: UserService,
         private _router: Router,
         private toastrService: ToastService
-    ) { }
+    ) {
+        this.userService.$currentUser.subscribe(user => this.user = user);
+    }
 
     canActivate(_next: ActivatedRouteSnapshot, _state: RouterStateSnapshot): boolean {
         return this.checkLoggedIn(_state.url);
@@ -30,7 +35,7 @@ export class UserGuardService implements CanActivate, CanLoad {
     }
 
     checkLoggedIn(url: string): boolean {
-        if (this.userService.loggedIn) {
+        if (this.user) {
             return true;
         }
         this.showError();

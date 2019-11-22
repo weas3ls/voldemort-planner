@@ -1,3 +1,4 @@
+import { MyAccountComponent } from './components/my-account/my-account.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -51,6 +52,9 @@ const routes: Routes = [{
 }, {
     path: 'event/:id',
     component: ViewEventComponent
+}, {
+    path: 'my-account',
+    component: MyAccountComponent
 }];
 
 @NgModule({
