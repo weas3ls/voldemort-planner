@@ -10,12 +10,12 @@ import { User } from '../models/User';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
-  selector: 'app-edit-event',
-  templateUrl: './edit-event.component.html',
-  styleUrls: ['./edit-event.component.scss']
+    selector: 'app-edit-event',
+    templateUrl: './edit-event.component.html',
+    styleUrls: ['./edit-event.component.scss']
 })
 export class EditEventComponent implements OnInit {
-    
+
     event: Event = null;
     event_id: number;
     title: string;
@@ -50,7 +50,7 @@ export class EditEventComponent implements OnInit {
     }
 
     async ngOnInit() {
-        this.event = await this.editEventService.getEvent(Number (this.activatedRoute.snapshot.paramMap.get('id')));
+        this.event = await this.editEventService.getEvent(Number(this.activatedRoute.snapshot.paramMap.get('id')));
         this.visibilitySelect = [
             { value: '1', label: 'Private (Just for you... and Lord Voldemort)' },
             { value: '2', label: 'Closed (Only people you choose... and Lord Voldemort)' },

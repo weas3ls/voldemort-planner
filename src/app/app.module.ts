@@ -23,7 +23,6 @@ import { HowToBeADeathEaterComponent } from './components/how-to-be-a-death-eate
 import { FAQComponent } from './components/faq/faq.component';
 import { DeathEaterAnthemComponent } from './components/death-eater-anthem/death-eater-anthem.component';
 import { ViewEventComponent } from './components/view-event/view-event.component';
-import { MyAccountComponent } from './components/my-account/my-account.component';
 import { JwtInterceptorService } from './services/jwt-interceptor/jwt-interceptor.service';
 
 @NgModule({
@@ -40,8 +39,7 @@ import { JwtInterceptorService } from './services/jwt-interceptor/jwt-intercepto
         HowToBeADeathEaterComponent,
         FAQComponent,
         DeathEaterAnthemComponent,
-        ViewEventComponent,
-        MyAccountComponent
+        ViewEventComponent
     ],
     imports: [
         BrowserModule,
@@ -80,8 +78,7 @@ import { JwtInterceptorService } from './services/jwt-interceptor/jwt-intercepto
         HowToBeADeathEaterComponent,
         FAQComponent,
         DeathEaterAnthemComponent,
-        ViewEventComponent,
-        MyAccountComponent
+        ViewEventComponent
     ]
 })
 export class AppModule { }

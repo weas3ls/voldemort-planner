@@ -1,5 +1,5 @@
 <div class="row p-5">
-    <div class="col-12 col-lg-4 ml-lg-auto">
+    <div class="col-12 col-lg-4 ml-lg-auto text-lg-center">
         <a type="button" mdbBtn color="primary" [routerLink]="['/create-event']" routerLinkActive="router-link-active" mdbWavesEffect>Create Event</a>
     </div>
     <div class="col-12 col-lg-9 mx-lg-auto">
@@ -29,7 +29,7 @@
         <div class="list-group" *ngIf="otherEvents; else empty">
             <div *ngFor="let otherEvent of otherEvents" class="list-group-item flex-column align-items-start rgba-black-strong white-text">
                 <div class="d-flex w-100 justify-content-between">
-                    <a class="h5 mb-1 white-text" [routerLink]="['/event', otherEvent.event_id]" routerLinkActive="router-link-active">{{ otherEvent.title }}</a>
+                    <a class="h5 mb-1 white-text" [routerLink]="['/view-event', otherEvent.event_id]" routerLinkActive="router-link-active">{{ otherEvent.title }}</a>
                     <small>other {{ otherEvent.created | date: 'medium' }}</small>
                 </div>
                 <p class="mb-1 lead">{{ otherEvent.description }}</p>

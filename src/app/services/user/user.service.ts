@@ -10,9 +10,8 @@ import { User } from 'src/app/components/models/User';
     providedIn: 'root'
 })
 export class UserService {
-    loggedInUser: User;
 
-    private userSubject: BehaviorSubject<any> = new BehaviorSubject<any>(this.loggedInUser);
+    private userSubject: BehaviorSubject<any> = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
     public $currentUser: Observable<User> = this.userSubject.asObservable();
 
     constructor(private httpClient: HttpClient) { }
@@ -23,7 +22,9 @@ export class UserService {
 
     register(credentials: any) {    
         const url = 'http://localhost:8001/users/1';
+        credentials['avatar_url'] = 'https://middle.pngfans.com/20190711/p/harry-potter-dark-mark-png-harry-potter-death-eate-476e858b044d85b8.jpg';
         return this.httpClient.post(url, credentials).pipe(map(user => {
+            localStorage.setItem('currentUser', JSON.stringify(user));
             this.userSubject.next(user);
             return user;
         }));
@@ -32,12 +33,14 @@ export class UserService {
     login(credentials: { username: string, password: string }) {
         const url = 'http://localhost:8001/auth';
         return this.httpClient.post(url, credentials).pipe(map(user => {
+            localStorage.setItem('currentUser', JSON.stringify(user));
             this.userSubject.next(user);
             return user;
         }));
     }
 
     logout() {
+        localStorage.removeItem('currentUser');
         this.userSubject.next(null);
     }
 }

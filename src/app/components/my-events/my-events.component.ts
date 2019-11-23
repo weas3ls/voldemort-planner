@@ -24,7 +24,7 @@ export class MyEventsComponent implements OnInit {
     }
 
     async ngOnInit() {
-        this.createdEvents = await this.myEventsService.getCreatedEvents();
-        this.otherEvents = await this.myEventsService.getOtherEvents();
+        this.createdEvents = await this.myEventsService.getCreatedEvents(this.user.userid);
+        this.otherEvents = await this.myEventsService.getOtherEvents(this.user.userid);
     }
 }

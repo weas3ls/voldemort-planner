@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { UserService } from 'src/app/services/user/user.service';
 import { Event } from '../../components/models/Event';
 
 @Injectable({
@@ -13,12 +12,13 @@ export class MyEventsService {
     otherEvents: Array<Event>;
 
     constructor(
-        private httpClient: HttpClient,
-        private userService: UserService
-    ) { }
+        private httpClient: HttpClient
+    ) {
 
-    async getCreatedEvents() {
-        const url = `http://localhost:8001/events/5/${this.userService.currentUserValue.userid}`;
+    }
+
+    async getCreatedEvents(userId: number) {
+        const url = `http://localhost:8001/events/5/${userId}`;
         const data = await this.httpClient.get(url).toPromise();
         if (data) {
             this.createdEvents = JSON.parse(JSON.stringify(data));
@@ -26,8 +26,8 @@ export class MyEventsService {
         return this.createdEvents;
     }
 
-    async getOtherEvents () {
-        const url = `http://localhost:8001/events/4/${this.userService.currentUserValue.userid}`;
+    async getOtherEvents (userId: number) {
+        const url = `http://localhost:8001/events/4/${userId}`;
         const data = await this.httpClient.get(url).toPromise();
         if (data) {
             this.otherEvents = JSON.parse(JSON.stringify(data));

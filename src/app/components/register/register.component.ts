@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, DefaultValueAccessor } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ToastService } from 'ng-uikit-pro-standard';
@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
     options = { opacity: 1, progressBar: true, timeOut: 3000, closeButton: true };
 
     constructor(
-        private toastrService: ToastService,
+        private toastService: ToastService,
         private userService: UserService,
         private router: Router,
     ) {
@@ -50,13 +50,12 @@ export class RegisterComponent implements OnInit {
         if (this.validatingForm.invalid) {
             return;
         }
-        this.validatingForm['avatar_url'] = 'https://middle.pngfans.com/20190711/p/harry-potter-dark-mark-png-harry-potter-death-eate-476e858b044d85b8.jpg';
         this.userService.register(this.validatingForm.value).pipe(first()).subscribe(data => {
-            this.toastrService.success('Registration successful', 'Welcome!', this.options);
+            this.toastService.success('Registration successful', 'Welcome!', this.options);
             this.router.navigate(['/my-events']);
         },
         error => {
-            this.toastrService.error('Registration failed!', 'Very interesting', this.options);
+            this.toastService.error('Registration failed!', 'Very interesting', this.options);
         });
     }
 }

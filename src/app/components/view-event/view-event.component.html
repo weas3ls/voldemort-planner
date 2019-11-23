@@ -1,1 +1,35 @@
-<p>view-event works!</p>
+<div class="row p-5">
+    <div class="col-12 col-lg-9 mx-lg-auto">
+        <a [routerLink]="['/']" routerLinkActive="router-link-active" class="px-4 white-text lead">
+            <mdb-icon fas icon="arrow-left"></mdb-icon> Back to my events
+        </a>
+    </div>
+    <div class="col-12 col-lg-7 mx-lg-auto mt-4">
+        <mdb-card dark="true">
+            <div class="view overlay waves-light" mdbWavesEffect>
+                <mdb-card-img src="https://media.giphy.com/media/yB6yUhYYEK9by/giphy.gif"></mdb-card-img>
+                <a>
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div>
+            <mdb-card-body class="elegant-color">
+                <mdb-card-title>
+                    <p class="activator px-3 mr-2">{{ num_attendants }} attending (so far)</p>
+                    <h4>{{ event.title }}</h4>
+                </mdb-card-title>
+                <hr class="hr-light">
+                <mdb-card-text class="white-text">
+                    <p class="lead">{{ event.description }}</p>
+                    <p class="lead"><a class="red-text d-block" href="https://www.google.com/maps/place/{{ event.address }}" target="_blank">{{ event.location }}</a></p>
+                </mdb-card-text>
+            </mdb-card-body>
+            <mdb-card-footer class="grey darken-3 d-flex justify-content-between">
+                <p mdbTooltip="{{ event.startTime | date: 'H:mm z' }} - {{ event.endTime | date: 'H:mm z' }}" placement="top" class="my-auto">{{ event.startTime | date: 'E, LLL d, yy' }} - {{ event.endTime | date: 'E, LLL d, yy' }}</p>
+                <button type="button" mdbBtn color="warning" *ngIf="user_attending; else attending" (click)="unAttend(event.event_id)" mdbWavesEffect>Un-attend</button>
+                <ng-template #attending>
+                    <button type="button" mdbBtn color="primary" (click)="attend(event.event_id)" mdbWavesEffect>Attend</button>
+                </ng-template>
+            </mdb-card-footer>
+        </mdb-card>
+    </div>
+</div>

@@ -27,8 +27,13 @@ export class LoginComponent implements OnInit {
         private userService: UserService,
         private router: Router,
         private route: ActivatedRoute,
-        private toastrService: ToastService
-    ) { }
+        private toastService: ToastService
+    ) {
+        // redirect to home if already logged in
+        if (this.userService.currentUserValue) {
+            this.router.navigate(['/']);
+        }
+    }
 
     ngOnInit() {
         this.validatingForm = new FormGroup({
@@ -44,7 +49,7 @@ export class LoginComponent implements OnInit {
         },
         error => {
             const options = { opacity: 1, progressBar: true, timeOut: 3000, closeButton: true };
-            this.toastrService.error('A true death eater would remember their password...', 'Wrong Credentials!', options);
+            this.toastService.error('A true death eater would remember their password...', 'Wrong Credentials!', options);
         });
     }
 

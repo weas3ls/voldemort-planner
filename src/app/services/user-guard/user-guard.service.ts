@@ -16,7 +16,7 @@ export class UserGuardService implements CanActivate, CanLoad {
     constructor(
         private userService: UserService,
         private _router: Router,
-        private toastrService: ToastService
+        private toastService: ToastService
     ) {
         this.userService.$currentUser.subscribe(user => this.user = user);
     }
@@ -31,7 +31,7 @@ export class UserGuardService implements CanActivate, CanLoad {
 
     showError() {
         const options = { opacity: 1, progressBar: true, timeOut: 3000, closeButton: true, enableHtml: true, messageClass: 'lead', titleClass: 'h6 mb-0' };
-        this.toastrService.error('You aren\'t logged in! &#129320;', 'Hey!', options);
+        this.toastService.error('You aren\'t logged in! &#129320;', 'Hey!', options);
     }
 
     checkLoggedIn(url: string): boolean {
