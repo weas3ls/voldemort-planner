@@ -1,6 +1,9 @@
 <div class="row p-5">
     <div class="col-12 col-lg-9 mx-lg-auto">
         <h1 class="h1">Edit Event: <small>{{ event.title }}</small></h1>
+        <a [routerLink]="['/']" routerLinkActive="router-link-active" class="white-text px-4">
+            <mdb-icon fas icon="arrow-left"></mdb-icon> Back to my events
+        </a>
     </div>
     <div class="col-12 col-lg-7 mx-lg-auto">
         <form (ngSubmit)="onSubmit()">

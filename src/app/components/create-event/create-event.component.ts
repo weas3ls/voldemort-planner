@@ -47,9 +47,9 @@ export class CreateEventComponent implements OnInit {
 
     ngOnInit() {
         this.visibilitySelect = [
-            { value: '1', label: 'Private (Just for you)' },
-            { value: '2', label: 'Closed (Only people you choose)' },
-            { value: '3', label: 'Open (For the world to see)' },
+            { value: '1', label: 'Private (Just for you... and Lord Voldemort)' },
+            { value: '2', label: 'Closed (Only people you choose... and Lord Voldemort)' },
+            { value: '3', label: 'Open (For the world to see... and Lord Voldemort)' },
         ];
         this.typeSelect = [
             { value: '1', label: 'Social' },
