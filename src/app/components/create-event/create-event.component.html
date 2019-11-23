@@ -3,44 +3,44 @@
         <h1 class="h1">Create New Event</h1>
     </div>
     <div class="col-12 col-lg-7 mx-lg-auto">
-        <form [formGroup]="validatingForm" (ngSubmit)="onSubmit()">
+        <form (ngSubmit)="onSubmit()">
             <div class="row">
                 <div class="col-12">
                     <div class="md-form">
-                        <input mdbInput type="text" name="title" formControlName="title" class="form-control white-text">
+                        <input mdbInput type="text" name="title" [(ngModel)]="title" class="form-control white-text">
                         <label class="white-text" for="title">Event Title</label>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="md-form white-text">
-                        <mdb-date-picker name="startDate" [options]="datePickerOptions" [placeholder]="'Start date'" formControlName="startDate" class="white-text" required></mdb-date-picker>
+                        <mdb-date-picker name="startDate" [options]="datePickerOptions" [placeholder]="'Start date'" [(ngModel)]="startDate" [label]="'Start date'" required></mdb-date-picker>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="md-form">
-                        <mdb-time-picker [buttonLabel]="'Done'" [placeholder]="'Start time'" name="startTime" formControlName="startTime" class="white-text" required></mdb-time-picker>
+                        <mdb-time-picker [buttonLabel]="'Done'" [twelvehour]="true" [placeholder]="'Start time'" name="startTime" [(ngModel)]="startTime" [label]="'Start time'" required></mdb-time-picker>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="md-form">
-                        <mdb-date-picker name="endDate" [options]="datePickerOptions" [placeholder]="'End date'" formControlName="endDate" class="white-text" required></mdb-date-picker>
+                        <mdb-date-picker name="endDate" [options]="datePickerOptions" [placeholder]="'End date'" [(ngModel)]="endDate" [label]="'End date'" required></mdb-date-picker>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="md-form">
-                        <mdb-time-picker [buttonLabel]="'Done'" [placeholder]="'End time'" name="endTime" formControlName="endTime" class="white-text" required></mdb-time-picker>
+                        <mdb-time-picker [buttonLabel]="'Done'" [twelvehour]="true" [placeholder]="'End time'" name="endTime" [(ngModel)]="endTime" [label]="'End time'" required></mdb-time-picker>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="md-form">
-                        <textarea type="text" name="description" formControlName="description" class="md-textarea form-control white-text" mdbInput required></textarea>
+                        <textarea type="text" name="description" [(ngModel)]="description" class="md-textarea form-control white-text" mdbInput required></textarea>
                         <label class="white-text" for="description">Description</label>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="md-form">
-                        <input mdbInput type="text" name="location" formControlName="location" class="form-control">
-                        <label for="location">Location</label>
+                        <input mdbInput type="text" name="location" [(ngModel)]="location" class="form-control">
+                        <label class="white-text" for="location">Location</label>
                     </div>
                 </div>
                 <div class="col-12">
@@ -49,7 +49,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text md-addon white-text" id="address-addon">https://www.google.com/maps/place/</span>
                         </div>
-                        <input type="text" class="form-control" name="address" formControlName="address" aria-describedby="address-addon" placeholder="Everything after *place/*">
+                        <input type="text" class="form-control" name="address" [(ngModel)]="address" aria-describedby="address-addon" placeholder="Everything after *place/*">
                     </div>
                 </div>
                 <div class="col-12">

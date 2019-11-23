@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
             this.router.navigate([this.returnUrl]);
         },
         error => {
-            console.log(error);
             const options = { opacity: 1, progressBar: true, timeOut: 3000, closeButton: true };
             this.toastrService.error('A true death eater would remember their password...', 'Wrong Credentials!', options);
         });

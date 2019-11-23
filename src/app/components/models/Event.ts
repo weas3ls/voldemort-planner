@@ -11,4 +11,5 @@ export interface Event {
     endTime: Time;
     visibility: number;
     image: File;
+    type: number;
 }

@@ -13,7 +13,7 @@
                     <small>Created {{ createdEvent.created | date: 'medium' }}</small>
                 </div>
                 <p class="mb-1 lead">{{ createdEvent.description }}</p>
-                <p mdbTooltip="{{ createdEvent.startTime | date: 'h:mm aaaaa Z' }} - {{ createdEvent.endTime | date: 'h:mm aaaaa Z' }}" placement="top" class="d-inline-block">Event dates: {{ createdEvent.startTime | date: 'E, LLL d, yy' }} - {{ createdEvent.endTime | date: 'E, LLL d, yy' }}</p>
+                <p mdbTooltip="{{ createdEvent.startTime | date: 'H:mm z' }} - {{ createdEvent.endTime | date: 'H:mm z' }}" placement="top" class="d-inline-block">Event dates: {{ createdEvent.startTime | date: 'E, LLL d, yy' }} - {{ createdEvent.endTime | date: 'E, LLL d, yy' }}</p>
                 <a class="red-text d-block" href="https://www.google.com/maps/place/{{ createdEvent.address }}" target="_blank">{{ createdEvent.location }}</a>
             </div>
         </div>
@@ -32,7 +32,7 @@
                     <small>other {{ otherEvent.created | date: 'medium' }}</small>
                 </div>
                 <p class="mb-1 lead">{{ otherEvent.description }}</p>
-                <p mdbTooltip="{{ otherEvent.startTime | date: 'h:mm aaaaa Z' }} - {{ otherEvent.endTime | date: 'h:mm aaaaa Z' }}" placement="top" class="d-inline-block">Event dates: {{ otherEvent.startTime | date: 'E, LLL d, yy' }} - {{ otherEvent.endTime | date: 'E, LLL d, yy' }}</p>
+                <p mdbTooltip="{{ otherEvent.startTime | date: 'H:mm z' }} - {{ otherEvent.endTime | date: 'H:mm z' }}" placement="top" class="d-inline-block">Event dates: {{ otherEvent.startTime | date: 'E, LLL d, yy' }} - {{ otherEvent.endTime | date: 'E, LLL d, yy' }}</p>
                 <a class="red-text d-block" href="https://www.google.com/maps/place/{{ otherEvent.address }}" target="_blank">{{ otherEvent.location }}</a>
             </div>
         </div>

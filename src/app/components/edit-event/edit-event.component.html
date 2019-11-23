@@ -1,9 +1,9 @@
 <div class="row p-5">
     <div class="col-12 col-lg-9 mx-lg-auto">
-        <h1 class="h1">Edit Event</h1>
+        <h1 class="h1">Edit Event: <small>{{ event.title }}</small></h1>
     </div>
     <div class="col-12 col-lg-7 mx-lg-auto">
-        <form>
+        <form (ngSubmit)="onSubmit()">
             <div class="row">
                 <div class="col-12">
                     <div class="md-form">
@@ -13,22 +13,22 @@
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="md-form white-text">
-                        <mdb-date-picker name="startDate" [options]="datePickerOptions" [placeholder]="'Start date'" [(ngModel)]="startDate" class="white-text" required></mdb-date-picker>
+                        <mdb-date-picker name="startDate" [options]="datePickerOptions" [placeholder]="'Start date'" [(ngModel)]="startDate" [label]="'Start date'" required></mdb-date-picker>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="md-form">
-                        <mdb-time-picker [buttonLabel]="'Done'" [twelvehour]="true" [placeholder]="'Start time'" name="startTime" [(ngModel)]="startTime" class="white-text" required></mdb-time-picker>
+                        <mdb-time-picker [buttonLabel]="'Done'" [twelvehour]="true" [placeholder]="'Start time'" name="startTime" [(ngModel)]="startTime" [label]="'Start time'" required></mdb-time-picker>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="md-form">
-                        <mdb-date-picker name="endDate" [options]="datePickerOptions" [placeholder]="'End date'" [(ngModel)]="endDate" class="white-text" required></mdb-date-picker>
+                        <mdb-date-picker name="endDate" [options]="datePickerOptions" [placeholder]="'End date'" [(ngModel)]="endDate" [label]="'End date'" required></mdb-date-picker>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
                     <div class="md-form">
-                        <mdb-time-picker [buttonLabel]="'Done'" [twelvehour]="true" [placeholder]="'End time'" name="endTime" [(ngModel)]="endTime" class="white-text" required></mdb-time-picker>
+                        <mdb-time-picker [buttonLabel]="'Done'" [twelvehour]="true" [placeholder]="'End time'" name="endTime" [(ngModel)]="endTime" [label]="'End time'" required></mdb-time-picker>
                     </div>
                 </div>
                 <div class="col-12">
@@ -40,7 +40,7 @@
                 <div class="col-12">
                     <div class="md-form">
                         <input mdbInput type="text" name="location" [(ngModel)]="location" class="form-control">
-                        <label for="location">Location</label>
+                        <label class="white-text" for="location">Location</label>
                     </div>
                 </div>
                 <div class="col-12">
@@ -63,10 +63,35 @@
                 </div>
             </div>
             <div class="row pt-md-5 text-right">
-                <div class="col-12">
-                    <button type="button" mdbBtn color="black" mdbWavesEffect>Submit Changes</button>
+                <div class="col-12 col-lg-6 text-left">
+                    <button type="button" mdbBtn color="danger" data-toggle="modal" data-target="#deleteEventModal" (click)="frame.show()" mdbWavesEffect>Delete Event</button>
+                </div>
+                <div class="col-12 col-lg-6 text-right">
+                    <button type="submit" mdbBtn color="black" mdbWavesEffect>Submit Changes</button>
                 </div>
             </div>
         </form>
+    </div>
+</div>
+
+<div mdbModal #frame="mdbModal" class="modal fade top" id="deleteEventModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-danger modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Delete Event</p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <mdb-icon fas icon="times" size="4x" class="mb-3 animated rotateIn"></mdb-icon>
+                    <p>Are you sure you want to delete this event?</p>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" mdbBtn color="danger" class="waves-effect" (click)="deleteEvent()" mdbWavesEffect>Delete</button>
+            </div>
+        </div>
     </div>
 </div>

@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user/user.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
@@ -7,6 +8,7 @@ import { IMyOptions, ToastService } from 'ng-uikit-pro-standard';
 import { first } from 'rxjs/operators';
 
 import { CreateEventService } from './../../services/create-event/create-event.service';
+import { User } from '../models/User';
 
 @Component({
     selector: 'app-create-event',
@@ -17,9 +19,15 @@ export class CreateEventComponent implements OnInit {
 
     startTime;
     endTime;
+    title;
+    startDate;
+    endDate;
+    description;
+    location;
+    address;
     file: File;
-    validatingForm: FormGroup;
     options = { opacity: 1, progressBar: true, timeOut: 3000, closeButton: true, toastClass: 'black' };
+    user: User;
 
     onFileAdd(file: File) {
         this.file = file;
@@ -36,35 +44,37 @@ export class CreateEventComponent implements OnInit {
     constructor(
         private toastService: ToastService,
         private createEventService: CreateEventService,
+        private userService: UserService,
         private datePipe: DatePipe,
         private router: Router
-    ) { }
+    ) {
+        this.userService.$currentUser.subscribe(user => this.user = user);
+    }
 
     ngOnInit() {
-        this.validatingForm = new FormGroup({
-            title: new FormControl(null, [Validators.required]),
-            startDate: new FormControl(null, [Validators.required]),
-            endDate: new FormControl(null, [Validators.required]),
-            startTime: new FormControl(null, [Validators.required]),
-            endTime: new FormControl(null, [Validators.required]),
-            description: new FormControl(null, [Validators.required]),
-            address: new FormControl(null, [Validators.required]),
-            location: new FormControl(null, [Validators.required])
-        });
     }
 
     onSubmit() {
-        if (this.validatingForm.invalid) {
-            this.toastService.error('Which field did you miss?', 'Bad Request', this.options);
-            return;
+        console.log(this.endDate);
+        console.log(this.endTime);
+        this.startTime = new Date(this.datePipe.transform(new Date(this.startDate), 'yyyy-MM-dd') + ' ' + this.startTime).toISOString();
+        this.endTime = new Date(this.datePipe.transform(new Date(this.endDate), 'yyyy-MM-dd') + ' ' + this.endTime).toISOString();
+        const data = {
+            userId: this.user.userid,
+            clientRequest: {
+                title: this.title,
+                type: 1,
+                description: this.description,
+                location: this.location,
+                address: this.address,
+                visibility: 1,
+                imgAddr: '',
+                startTime: this.startTime,
+                endTime: this.endTime
+            }
         }
-        this.startTime = new Date(this.datePipe.transform(new Date(this.validatingForm.get('startDate').value), 'yyyy-MM-dd') + ' ' + this.validatingForm.get('startTime').value).toUTCString();
-        this.endTime = new Date(this.datePipe.transform(new Date(this.validatingForm.get('endDate').value), 'yyyy-MM-dd') + ' ' + this.validatingForm.get('endTime').value).toUTCString();
-        this.validatingForm.patchValue({startTime: this.startTime});
-        this.validatingForm.patchValue({endTime: this.endTime});
-        this.validatingForm.removeControl('startDate');
-        this.validatingForm.removeControl('endDate');
-        this.createEventService.createEvent(this.validatingForm.value).pipe(first()).subscribe(data => {
+        console.log(data);
+        this.createEventService.createEvent(data).pipe(first()).subscribe(data => {
             this.toastService.success('Lord Voldemort is pleased', 'Event created!', this.options);
             this.router.navigate(['/my-events']);
         });
