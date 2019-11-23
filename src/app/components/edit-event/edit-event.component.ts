@@ -1,13 +1,13 @@
-import { UserService } from 'src/app/services/user/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 import { IMyOptions, ToastService } from 'ng-uikit-pro-standard';
 
 import { Event } from './../models/Event';
-import { User } from '../models/User';
 import { EditEventService } from './../../services/edit-event/edit-event.service';
-import { DatePipe } from '@angular/common';
+import { User } from '../models/User';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-edit-event',
@@ -26,24 +26,17 @@ export class EditEventComponent implements OnInit {
     description: string;
     address: string;
     location: string;
-    type: number;
-    visibility: number;
-    file: File;
+    type: string;
+    visibility: string;
     user: User;
     errorOptions = { opacity: 1, progressBar: true, timeOut: 3000, closeButton: true };
     successOptions = { opacity: 1, progressBar: true, timeOut: 3000, closeButton: true, toastClass: 'black' };
+    visibilitySelect: Array<any>;
+    typeSelect: Array<any>;
 
     public datePickerOptions: IMyOptions = {
         dateFormat: 'ddd, mmm d, yyyy'
     };
-
-    onFileAdd(file: File) {
-        this.file = file;
-    }
-
-    onFileRemove() {
-        this.file = null;
-    }
 
     constructor(
         private editEventService: EditEventService,
@@ -58,6 +51,17 @@ export class EditEventComponent implements OnInit {
 
     async ngOnInit() {
         this.event = await this.editEventService.getEvent(Number (this.activatedRoute.snapshot.paramMap.get('id')));
+        this.visibilitySelect = [
+            { value: '1', label: 'Private (Just for you)' },
+            { value: '2', label: 'Closed (Only people you choose)' },
+            { value: '3', label: 'Open (For the world to see)' },
+        ];
+        this.typeSelect = [
+            { value: '1', label: 'Social' },
+            { value: '2', label: 'Business' },
+            { value: '3', label: 'Other' },
+        ];
+
         if (this.event) {
             this.event_id = this.event.event_id;
             this.title = this.event.title;
@@ -70,9 +74,8 @@ export class EditEventComponent implements OnInit {
             this.description = this.event.description;
             this.address = this.event.address;
             this.location = this.event.location;
-            this.file = this.event.image;
-            this.type = this.event.type;
-            this.visibility = this.event.visibility;
+            this.type = this.event.type.toString();
+            this.visibility = this.event.visibility.toString();
         }
     }
 
@@ -87,7 +90,6 @@ export class EditEventComponent implements OnInit {
                 location: this.location,
                 address: this.address,
                 visibility: this.visibility,
-                imgAddr: this.file,
                 startTime: new Date(this.datePipe.transform(new Date(this.startDate), 'yyyy-MM-dd') + ' ' + this.startTime).toISOString(),
                 endTime: new Date(this.datePipe.transform(new Date(this.endDate), 'yyyy-MM-dd') + ' ' + this.endTime).toISOString()
             }

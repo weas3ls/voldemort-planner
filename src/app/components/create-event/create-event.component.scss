@@ -26,3 +26,7 @@
 ::ng-deep label {
     color: white !important;
 }
+
+::ng-deep mdb-select>div>div.single>div.value {
+    color: white !important;
+}
